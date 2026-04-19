@@ -1,105 +1,91 @@
 "use client";
-
 import { useState, useEffect } from "react";
-import { Scale, Menu, X } from "lucide-react";
 
-const links = [
-  { label: "Fonctionnalités", href: "#features" },
-  { label: "Pourquoi Atlas", href: "#why" },
-  { label: "Genèse", href: "#founder" },
+const LINKS = [
+  { label: "Défis",   href: "#pains" },
+  { label: "Modules", href: "#modules" },
+  { label: "Vision",  href: "#vision" },
+  { label: "Bêta",    href: "#tarifs" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [lang, setLang] = useState<"fr"|"en">("fr");
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 30);
+    const fn = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", fn, { passive: true });
+    fn();
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
+  const smoothTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 60, behavior: "smooth" });
+  };
+
   return (
-    <header
-      style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
-        transition: "background 0.3s, border-color 0.3s, backdrop-filter 0.3s",
-        background: scrolled ? "rgba(4,11,24,0.85)" : "transparent",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "1px solid transparent",
-      }}
-    >
-      <nav style={{
-        maxWidth: 1200, margin: "0 auto",
-        padding: "0 1.5rem", height: 66,
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-      }}>
+    <nav style={{
+      position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
+      transition: "background .3s, border-color .3s",
+      background: scrolled ? "rgba(4,11,24,0.72)" : "transparent",
+      backdropFilter: scrolled ? "blur(14px) saturate(140%)" : "none",
+      borderBottom: `1px solid ${scrolled ? "var(--line)" : "transparent"}`,
+    }}>
+      <div className="container" style={{ display:"flex", alignItems:"center", justifyContent:"space-between", padding:"18px 32px" }}>
+
         {/* Logo */}
-        <a href="#" style={{ display:"flex", alignItems:"center", gap:"0.6rem", textDecoration:"none" }}>
-          <div style={{
-            width: 34, height: 34, borderRadius: "0.5rem",
-            background: "linear-gradient(135deg, #3B82F6, #1E40AF)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            boxShadow: "0 0 16px rgba(59,130,246,0.35)",
-          }}>
-            <Scale size={16} color="#fff" />
-          </div>
+        <a href="#" style={{ display:"flex", alignItems:"center", gap:10, fontFamily:"var(--serif)", fontSize:22, letterSpacing:"-0.01em" }}>
           <span style={{
-            fontFamily: "'EB Garamond', Georgia, serif",
-            fontSize: "1.35rem", fontWeight: 600,
-            color: "#F0F4FF", letterSpacing: "-0.01em",
-          }}>Atlas</span>
+            width:28, height:28, borderRadius:7, position:"relative",
+            background:"linear-gradient(145deg,#1a2a4a,#0a1428)",
+            border:"1px solid var(--line-2)",
+            display:"grid", placeItems:"center",
+            boxShadow:"inset 0 1px 0 rgba(255,255,255,0.08), 0 0 0 1px rgba(245,158,11,0.15)",
+          }}>
+            <span style={{
+              width:10, height:10, borderRadius:"50%",
+              background:"radial-gradient(circle at 30% 30%, #FBBF24, #F59E0B 60%, #7a4e05)",
+              boxShadow:"0 0 12px rgba(245,158,11,0.55)",
+              display:"block",
+            }} />
+          </span>
+          <span>Atlas</span>
         </a>
 
-        {/* Desktop links */}
-        <ul style={{
-          display: "flex", gap: "2rem", listStyle: "none", margin: 0, padding: 0,
-        }} className="hidden md:flex">
-          {links.map(l => (
-            <li key={l.href}>
-              <a href={l.href} style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "0.85rem", fontWeight: 400,
-                color: "rgba(240,244,255,0.5)", textDecoration: "none",
-                transition: "color 0.15s",
-              }}
-                onMouseEnter={e => (e.currentTarget.style.color = "rgba(240,244,255,0.9)")}
-                onMouseLeave={e => (e.currentTarget.style.color = "rgba(240,244,255,0.5)")}
-              >{l.label}</a>
-            </li>
+        {/* Desktop nav */}
+        <div style={{ display:"flex", gap:34, fontFamily:"var(--sans)", fontSize:14, color:"var(--ink-2)" }}
+          className="hidden md:flex">
+          {LINKS.map(l => (
+            <a key={l.href} href={l.href} style={{ position:"relative", padding:"6px 0", transition:"color .2s" }}
+              onMouseEnter={e => (e.currentTarget.style.color = "var(--ink)")}
+              onMouseLeave={e => (e.currentTarget.style.color = "var(--ink-2)")}
+            >{l.label}</a>
           ))}
-        </ul>
-
-        {/* CTA */}
-        <a href="#waitlist" className="btn-cta hidden md:inline-flex" style={{ fontSize: "0.82rem", padding: "0.55rem 1.2rem" }}>
-          Rejoindre la liste d&apos;attente
-        </a>
-
-        {/* Mobile burger */}
-        <button className="md:hidden" onClick={() => setOpen(!open)}
-          style={{ background: "none", border: "none", cursor: "pointer", color: "var(--text)", padding: "0.5rem" }}
-          aria-label="Menu">
-          {open ? <X size={21} /> : <Menu size={21} />}
-        </button>
-      </nav>
-
-      {/* Mobile panel */}
-      {open && (
-        <div style={{
-          background: "rgba(4,11,24,0.97)", backdropFilter: "blur(20px)",
-          borderTop: "1px solid var(--border)",
-          padding: "1.5rem", display: "flex", flexDirection: "column", gap: "1.25rem",
-        }}>
-          {links.map(l => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)} style={{
-              color: "rgba(240,244,255,0.7)", textDecoration: "none", fontSize: "1rem",
-            }}>{l.label}</a>
-          ))}
-          <a href="#waitlist" onClick={() => setOpen(false)} className="btn-cta" style={{ justifyContent: "center" }}>
-            Rejoindre la liste d&apos;attente
-          </a>
         </div>
-      )}
-    </header>
+
+        {/* Right */}
+        <div style={{ display:"flex", alignItems:"center", gap:16 }}>
+          {/* Lang toggle */}
+          <div style={{ fontFamily:"var(--mono)", fontSize:12, color:"var(--mute)", letterSpacing:"0.1em", display:"flex", gap:8 }}>
+            {(["fr","en"] as const).map(l => (
+              <span key={l}
+                onClick={() => setLang(l)}
+                style={{
+                  padding:"4px 6px", borderRadius:4, cursor:"pointer", textTransform:"uppercase",
+                  background: lang === l ? "var(--line)" : "transparent",
+                  color: lang === l ? "var(--ink)" : "var(--mute)",
+                }}>{l}</span>
+            ))}
+          </div>
+          <button className="btn btn-ghost hidden md:inline-flex"
+            onClick={() => smoothTo("tarifs")}
+            style={{ fontSize:14 }}>
+            Rejoindre la liste
+          </button>
+        </div>
+      </div>
+    </nav>
   );
 }
