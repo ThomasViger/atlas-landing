@@ -1,210 +1,198 @@
 "use client";
+import { useEffect, useRef, useState } from "react";
 
-import { useState } from "react";
-import { ArrowRight, ShieldCheck } from "lucide-react";
-
-const BAR_COUNT = 18;
+const BARS = 48;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function GradientBars() {
-  const bars = Array.from({ length: BAR_COUNT }, (_, i) => {
-    const pos = i / (BAR_COUNT - 1);
-    const dist = Math.abs(pos - 0.5);
-    const h = 0.18 + Math.pow(dist * 2, 1.3) * 0.82;
-    const delay = (i * 0.11).toFixed(2);
-    return { h, delay };
-  });
-
+  const bars = Array.from({ length: BARS }, (_, i) => ({
+    delay: (Math.random() * 3).toFixed(2),
+    dur:   (3 + Math.random() * 3).toFixed(2),
+  }));
   return (
-    <div aria-hidden style={{
-      position: "absolute", inset: 0, zIndex: 0,
-      display: "flex", overflow: "hidden",
+    <div style={{
+      position:"absolute", inset:0, pointerEvents:"none",
+      display:"flex", gap:3, padding:"0 8%",
+      maskImage:"linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)",
     }}>
-      {bars.map(({ h, delay }, i) => (
-        <div key={i} style={{
-          flex: "1 0 0",
-          height: "100%",
-          background: `linear-gradient(to top, rgba(245,158,11,0.35), rgba(59,130,246,0.08), transparent)`,
-          transform: `scaleY(${h})`,
-          transformOrigin: "bottom",
-          animation: `pulseBar 2.8s ease-in-out infinite alternate`,
-          animationDelay: `${delay}s`,
-          ["--bar-h" as string]: h,
+      {bars.map((b, i) => (
+        <span key={i} style={{
+          flex:1, borderRadius:99,
+          background:"linear-gradient(180deg, transparent, rgba(245,158,11,0.18), transparent)",
+          transformOrigin:"center",
+          animation:`pulse ${b.dur}s ease-in-out infinite`,
+          animationDelay:`-${b.delay}s`,
         }} />
       ))}
     </div>
   );
 }
 
-export default function Hero() {
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [done, setDone] = useState(false);
+function HeroMock() {
+  const rows = [
+    { ref:"DOSS-2026-041", label:"Succession Lefèvre — mémoire en réplique",    status:"à signer", cls:"wait" },
+    { ref:"DOSS-2026-038", label:"SCI du Château — rédaction des statuts",       status:"envoyé",   cls:"ok" },
+    { ref:"DOSS-2026-047", label:"M. Durand c/ URSSAF — conclusions",            status:"nouveau",  cls:"new" },
+    { ref:"DOSS-2026-039", label:"Bail commercial Rue de Rivoli",                status:"archivé",  cls:"ok" },
+  ];
+  const badge: Record<string,{bg:string;color:string}> = {
+    wait:{ bg:"rgba(245,158,11,0.12)", color:"var(--amber-2)" },
+    ok:  { bg:"rgba(34,197,94,0.12)",  color:"#86efac" },
+    new: { bg:"rgba(148,163,255,0.12)",color:"#c7d2fe" },
+  };
+  return (
+    <div style={{
+      position:"relative", borderRadius:16,
+      background:"linear-gradient(160deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01))",
+      border:"1px solid var(--line)", padding:18,
+      boxShadow:"0 40px 80px -30px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.02)",
+      backdropFilter:"blur(8px)",
+    }}>
+      {/* amber top border gradient */}
+      <div style={{
+        position:"absolute", inset:-1, borderRadius:17, padding:1,
+        background:"linear-gradient(160deg,rgba(245,158,11,0.35),transparent 40%)",
+        WebkitMask:"linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+        WebkitMaskComposite:"xor", maskComposite:"exclude", pointerEvents:"none",
+      }} />
+      {/* Tabs */}
+      <div style={{ display:"flex", gap:6, paddingBottom:14, borderBottom:"1px solid var(--line)", marginBottom:14 }}>
+        {["DOSSIERS","AGENDA","FACTURATION","COFFRE"].map((t,i) => (
+          <span key={t} style={{
+            fontSize:11.5, padding:"6px 10px", borderRadius:6,
+            fontFamily:"var(--mono)", letterSpacing:"0.04em",
+            background: i===0 ? "rgba(245,158,11,0.12)" : "transparent",
+            color: i===0 ? "var(--amber-2)" : "var(--mute)",
+          }}>{t}</span>
+        ))}
+      </div>
+      {/* Rows */}
+      {rows.map(r => (
+        <div key={r.ref} style={{
+          display:"grid", gridTemplateColumns:"1fr 2fr auto", gap:14,
+          padding:"14px 6px", borderBottom:"1px dashed var(--line)",
+          fontSize:13, alignItems:"center",
+        }}>
+          <span style={{ color:"var(--mute)", fontFamily:"var(--mono)", fontSize:11.5 }}>{r.ref}</span>
+          <span style={{ color:"var(--ink)" }}>{r.label}</span>
+          <span style={{
+            padding:"3px 8px", borderRadius:99,
+            fontFamily:"var(--mono)", fontSize:10.5, letterSpacing:"0.05em",
+            ...badge[r.cls],
+          }}>{r.status}</span>
+        </div>
+      ))}
+      <div style={{
+        display:"flex", justifyContent:"space-between",
+        paddingTop:14, marginTop:8, borderTop:"1px solid var(--line)",
+        fontFamily:"var(--mono)", fontSize:11, color:"var(--mute)",
+      }}>
+        <span>47 DOSSIERS ACTIFS</span>
+        <span style={{ color:"var(--amber-2)" }}>● SYNC EN DIRECT</span>
+      </div>
+    </div>
+  );
+}
 
-  const handleSubmit = (e: React.FormEvent) => {
+function WaitlistForm({ id }: { id: string }) {
+  const [email, setEmail] = useState("");
+  const [state, setState] = useState<"idle"|"loading"|"success"|"error">("idle");
+
+  const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
-    setLoading(true);
-    setTimeout(() => { setLoading(false); setDone(true); }, 1400);
+    if (!EMAIL_RE.test(email.trim())) { setState("error"); return; }
+    setState("loading");
+    setTimeout(() => setState("success"), 650);
   };
 
   return (
-    <section style={{
-      position: "relative",
-      minHeight: "100vh",
-      display: "flex", alignItems: "center", justifyContent: "center",
-      overflow: "hidden",
-      background: "var(--bg)",
-    }}>
-      {/* Grid */}
-      <div className="grid-bg" aria-hidden style={{ position:"absolute", inset:0, zIndex:0 }} />
-      {/* Bars */}
-      <GradientBars />
-      {/* Radial vignette */}
-      <div aria-hidden style={{
-        position:"absolute", inset:0, zIndex:1,
-        background:"radial-gradient(ellipse 80% 60% at 50% 100%, transparent 0%, var(--bg) 75%)",
-      }} />
-      {/* Top fade */}
-      <div aria-hidden style={{
-        position:"absolute", top:0, left:0, right:0, height:"220px", zIndex:1,
-        background:"linear-gradient(to bottom, var(--bg) 0%, transparent 100%)",
-      }} />
-
-      {/* Content */}
-      <div style={{
-        position: "relative", zIndex: 2,
-        maxWidth: 780, width: "100%", margin: "0 auto",
-        padding: "120px 1.5rem 5rem",
-        textAlign: "center",
-        animation: "fadeUp 0.9s ease both",
-      }}>
-        {/* Badge */}
-        <div style={{ marginBottom: "2rem", display:"flex", justifyContent:"center" }}>
-          <span className="pill">
-            <ShieldCheck size={11} style={{ color: "var(--cta)" }} />
-            Conçu par un avocat du Barreau de Rouen
-          </span>
-        </div>
-
-        {/* Headline */}
-        <h1 style={{
-          fontFamily: "'EB Garamond', Georgia, serif",
-          fontSize: "clamp(2.8rem, 7vw, 5rem)",
-          fontWeight: 600,
-          marginBottom: "1.5rem",
-          lineHeight: 1.08,
-        }}>
-          <span className="gradient-text">On porte votre cabinet,</span>
-          <br />
-          <em className="gradient-text-amber" style={{ fontStyle:"italic" }}>vous plaidez.</em>
-        </h1>
-
-        {/* Sub */}
-        <p style={{
-          fontFamily: "'Inter', sans-serif",
-          fontSize: "clamp(1rem, 2vw, 1.15rem)",
-          fontWeight: 300,
-          color: "var(--text-muted)",
-          lineHeight: 1.75,
-          maxWidth: 560, margin: "0 auto 2.5rem",
-          animation: "fadeUp 0.9s 0.15s ease both",
-        }}>
-          Atlas remplace Word, Excel et les post-it par un outil évident et immédiatement utile.
-          Dossiers, délais, facturation, documents — sans formation, sans usine à gaz.
-        </p>
-
-        {/* Form */}
-        <div style={{ animation:"fadeUp 0.9s 0.3s ease both" }}>
-          {!done ? (
-            <form onSubmit={handleSubmit} style={{
-              display: "flex", gap: "0.6rem",
-              justifyContent: "center", flexWrap: "wrap",
-              marginBottom: "1rem",
-            }}>
-              <input
-                type="email" value={email} required
-                onChange={e => setEmail(e.target.value)}
-                placeholder="votre@cabinet.fr"
-                aria-label="Adresse email"
-                className="input-dark"
-                style={{ width: 260, maxWidth: "100%" }}
-              />
-              <button type="submit" className="btn-cta" disabled={loading} style={{
-                opacity: loading ? 0.7 : 1,
-                cursor: loading ? "not-allowed" : "pointer",
-              }}>
-                {loading ? (
-                  <span style={{
-                    width:16, height:16, border:"2px solid rgba(0,0,0,0.3)",
-                    borderTopColor:"#0A0A0A", borderRadius:"50%",
-                    display:"inline-block",
-                    animation:"spinCW 0.7s linear infinite",
-                  }} />
-                ) : (
-                  <>Rejoindre la liste <ArrowRight size={15} /></>
-                )}
-              </button>
-            </form>
-          ) : (
-            <div style={{
-              display:"inline-block",
-              padding:"0.85rem 2rem",
-              background:"rgba(245,158,11,0.1)",
-              border:"1px solid rgba(245,158,11,0.3)",
-              borderRadius:"999px",
-              color:"#FCD34D",
-              fontFamily:"'Inter',sans-serif",
-              fontWeight:600,
-              fontSize:"0.9rem",
-              marginBottom:"1rem",
-              animation:"fadeIn 0.4s ease",
-            }}>
-              Parfait — vous êtes sur la liste. À très bientôt.
-            </div>
+    <div>
+      <form id={id} onSubmit={submit} noValidate
+        className="waitlist"
+        style={{ opacity: state==="success" ? 0.5 : 1, pointerEvents: state==="success" ? "none" : "auto" }}>
+        <input type="email" name="email" placeholder="votre.email@cabinet.fr"
+          aria-label="Adresse e-mail" autoComplete="email"
+          value={email} onChange={e => { setEmail(e.target.value); if(state==="error") setState("idle"); }}
+        />
+        <button className="btn btn-primary" type="submit" disabled={state==="loading"}
+          style={{ padding:"10px 16px", minWidth:140 }}>
+          {state==="loading" ? (
+            <span style={{ width:14, height:14, border:"2px solid rgba(26,16,0,0.3)", borderTopColor:"#1a1000",
+              borderRadius:"50%", display:"inline-block", animation:"spin 0.7s linear infinite" }} />
+          ) : "Rejoindre la liste"}
+          {state==="idle" && (
+            <svg viewBox="0 0 16 16" fill="none" style={{ width:14, height:14 }}>
+              <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           )}
-
-          <p style={{
-            fontFamily:"'Inter',sans-serif", fontSize:"0.72rem",
-            color:"var(--text-dim)", letterSpacing:"0.03em",
-          }}>
-            Lancement septembre 2026 &nbsp;·&nbsp; Zéro spam &nbsp;·&nbsp; RGPD conforme
-          </p>
+        </button>
+      </form>
+      {state==="error" && <div className="form-error" style={{ display:"block" }}>Merci de saisir une adresse e-mail valide.</div>}
+      {state==="success" && (
+        <div className="form-success" style={{ display:"block" }}>
+          ✓ Vous êtes inscrit. Nous vous écrirons avant l&apos;ouverture de la bêta.
         </div>
+      )}
+      <div className="form-meta">
+        <div className="avatars">
+          {["T","M","L","C"].map(l => <span key={l}>{l}</span>)}
+        </div>
+        <span><b style={{ color:"var(--ink)", fontWeight:500 }}>412</b> avocats inscrits · Barreaux de Paris, Lyon, Bordeaux</span>
+      </div>
+    </div>
+  );
+}
 
-        {/* Stats */}
+export default function Hero() {
+  return (
+    <header style={{ position:"relative", padding:"160px 0 120px", overflow:"hidden" }}>
+      {/* Grid bg */}
+      <div style={{
+        position:"absolute", inset:0, pointerEvents:"none", opacity:0.5,
+        backgroundImage:"linear-gradient(to right,rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.04) 1px,transparent 1px)",
+        backgroundSize:"64px 64px",
+        maskImage:"radial-gradient(ellipse at 50% 10%, black 40%, transparent 75%)",
+      }} />
+      <GradientBars />
+
+      <div className="container">
         <div style={{
-          marginTop: "4rem",
-          display: "grid", gridTemplateColumns: "repeat(3,1fr)",
-          gap: "1.5rem", maxWidth: 520, marginLeft:"auto", marginRight:"auto",
-          animation:"fadeUp 0.9s 0.45s ease both",
-        }}>
-          {[
-            { v: "60%",       l: "des avocats encore sur Excel" },
-            { v: "1j/sem",    l: "perdue en tâches admin" },
-            { v: "Sept 2026", l: "lancement prévu" },
-          ].map(s => (
-            <div key={s.v}>
-              <div style={{
-                fontFamily:"'EB Garamond',Georgia,serif",
-                fontSize:"clamp(1.5rem,3vw,2.1rem)",
-                fontWeight:600,
-                lineHeight:1,
-                marginBottom:"0.25rem",
-              }} className="gradient-text-amber">{s.v}</div>
-              <div style={{
-                fontFamily:"'Inter',sans-serif", fontSize:"0.73rem",
-                color:"var(--text-muted)", lineHeight:1.4,
-              }}>{s.l}</div>
-            </div>
-          ))}
+          display:"grid", gridTemplateColumns:"1.15fr .9fr",
+          gap:80, alignItems:"center",
+        }} className="hero-inner">
+          {/* Left */}
+          <div>
+            <span className="eyebrow">Bêta privée · Rentrée 2026</span>
+            <h1 style={{
+              fontSize:"clamp(48px,6.4vw,84px)", lineHeight:1.02,
+              letterSpacing:"-0.025em", margin:"24px 0 28px",
+            }}>
+              Le cabinet<br />ne vous attend plus.<br />
+              <em style={{
+                fontStyle:"italic",
+                background:"linear-gradient(180deg,#FDE9B4,#F59E0B 70%,#b57a08)",
+                WebkitBackgroundClip:"text", backgroundClip:"text", color:"transparent",
+              }}>Atlas s&apos;en charge.</em>
+            </h1>
+            <p style={{ fontSize:18, color:"var(--ink-2)", maxWidth:540, marginBottom:36, lineHeight:1.55 }}>
+              Atlas est le copilote pensé pour l&apos;avocat qui exerce seul. Rédaction, facturation, agenda, coffre-fort —{" "}
+              <strong style={{ color:"var(--ink)", fontWeight:500 }}>un seul outil</strong>, conçu avec des confrères du Barreau de Rouen.
+            </p>
+            <WaitlistForm id="waitlist-hero" />
+          </div>
+
+          {/* Right: mock */}
+          <div className="hidden md:block">
+            <HeroMock />
+          </div>
         </div>
       </div>
 
-      {/* Bottom divider */}
-      <div aria-hidden style={{
-        position:"absolute", bottom:0, left:0, right:0, height:"1px", zIndex:2,
-        background:"linear-gradient(to right, transparent, rgba(255,255,255,0.07), transparent)",
-      }} />
-    </section>
+      <style>{`
+        @media (max-width:900px) {
+          .hero-inner { grid-template-columns: 1fr !important; gap: 60px !important; }
+        }
+      `}</style>
+    </header>
   );
 }

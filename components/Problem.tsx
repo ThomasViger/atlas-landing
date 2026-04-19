@@ -1,115 +1,146 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { AlertTriangle, Receipt, UserX } from "lucide-react";
-
 const pains = [
   {
-    icon: AlertTriangle,
-    color: "#EF4444",
-    glow: "rgba(239,68,68,0.18)",
-    tag: "Risque juridique",
-    title: "Le délai oublié",
-    body: "Une forclusion. Une radiation. La perte définitive du droit d'agir. Parce que l'alerte était dans un Excel que vous n'avez pas ouvert ce matin-là.",
+    num: "01",
+    tag: "FACTURATION",
+    headline: "Relancer, oublier, relancer encore.",
+    body: "Des honoraires qui traînent, des clients silencieux, une trésorerie sous pression. Le travail est fait — mais pas encaissé.",
+    stat: "62%",
+    statLabel: "des honoraires sont relancés manuellement",
+    color: "rgba(245,158,11,0.9)",
+    glow: "rgba(245,158,11,0.07)",
+    border: "rgba(245,158,11,0.18)",
   },
   {
-    icon: Receipt,
-    color: "#F59E0B",
-    glow: "rgba(245,158,11,0.18)",
-    tag: "Impact financier",
-    title: "La facturation négligée",
-    body: "Des honoraires qui traînent, des relances jamais envoyées, une trésorerie sous pression. Le travail est fait — mais pas encaissé.",
+    num: "02",
+    tag: "RÉDACTION",
+    headline: "Recommencer chaque acte depuis zéro.",
+    body: "Pas de modèle. Pas de contexte sauvegardé. Chaque assignation, chaque conclusion repart d'une page blanche.",
+    stat: "14h",
+    statLabel: "par semaine perdues en tâches non-juridiques",
+    color: "rgba(167,139,250,0.9)",
+    glow: "rgba(167,139,250,0.07)",
+    border: "rgba(167,139,250,0.18)",
   },
   {
-    icon: UserX,
-    color: "#A78BFA",
-    glow: "rgba(167,139,250,0.18)",
-    tag: "Coût humain",
-    title: "L'isolement professionnel",
-    body: "Pas de collègue à qui demander un avis. L'avocat solo porte tout — souvent seul, à 22h, devant un dossier complexe.",
+    num: "03",
+    tag: "DISPERSION",
+    headline: "Sept outils, aucun qui se parle.",
+    body: "Word, Excel, Dropbox, Outlook, un logiciel de compta, un gestionnaire d'agenda. Des silos qui vous coûtent une heure par jour.",
+    stat: "7.2",
+    statLabel: "outils différents en moyenne par cabinet solo",
+    color: "rgba(56,189,248,0.9)",
+    glow: "rgba(56,189,248,0.07)",
+    border: "rgba(56,189,248,0.18)",
   },
 ];
 
 export default function Problem() {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.querySelectorAll(".reveal").forEach(el => el.classList.add("visible"));
-        }
-      });
-    }, { threshold: 0.15 });
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section className="section" style={{ background: "var(--bg-alt)" }} ref={ref}>
-      <div className="section-inner">
-        <div style={{ textAlign:"center", marginBottom:"3.5rem" }}>
-          <p className="section-label reveal">Le problème</p>
-          <h2 className="section-title reveal reveal-delay-1" style={{ maxWidth:680, margin:"0 auto 1rem" }}>
-            60% des avocats français travaillent encore avec Word, Excel et des post-it.
+    <section id="pains" style={{ position:"relative", padding:"110px 0" }}>
+      {/* Ambient glow */}
+      <div aria-hidden style={{
+        position:"absolute", top:0, left:"50%", transform:"translateX(-50%)",
+        width:800, height:600,
+        background:"radial-gradient(ellipse at 50% 0%, rgba(245,158,11,0.05) 0%, transparent 65%)",
+        pointerEvents:"none",
+      }} />
+
+      <div className="container">
+        {/* Header */}
+        <div style={{ maxWidth:640, marginBottom:72 }}>
+          <span className="eyebrow">Le problème</span>
+          <h2 style={{
+            fontSize:"clamp(36px,4.4vw,56px)", lineHeight:1.08,
+            letterSpacing:"-0.022em", margin:"20px 0 18px",
+          }}>
+            L&apos;avocat solo porte tout.<br />
+            <em style={{
+              fontStyle:"italic",
+              background:"linear-gradient(180deg,#FDE9B4,#F59E0B 70%,#b57a08)",
+              WebkitBackgroundClip:"text", backgroundClip:"text", color:"transparent",
+            }}>Souvent seul, sans outil adapté.</em>
           </h2>
-          <p className="section-sub reveal reveal-delay-2" style={{ margin:"0 auto" }}>
-            Pas un manque de sérieux — un manque d&apos;outil adapté. Résultat : une journée par semaine perdue en tâches non-juridiques.
+          <p style={{ fontSize:17, color:"var(--ink-2)", lineHeight:1.6, margin:0 }}>
+            60% des avocats français travaillent encore avec Word, Excel et des post-it —
+            pas par manque de sérieux, mais par manque d&apos;un outil taillé pour leur réalité.
           </p>
         </div>
 
+        {/* Pain cards */}
         <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr))",
-          gap: "1rem",
+          display:"grid",
+          gridTemplateColumns:"repeat(auto-fit, minmax(300px, 1fr))",
+          gap:16,
         }}>
-          {pains.map(({ icon: Icon, color, glow, tag, title, body }, i) => (
-            <div key={title} className={`glass-card reveal reveal-delay-${i + 1}`}
-              style={{ padding:"1.75rem" }}>
-              {/* Top row */}
-              <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:"1.25rem" }}>
-                <div style={{
-                  width:42, height:42, borderRadius:"0.625rem",
-                  background: `rgba(${hexToRgb(color)},0.12)`,
-                  border: `1px solid rgba(${hexToRgb(color)},0.2)`,
-                  display:"flex", alignItems:"center", justifyContent:"center",
-                }}>
-                  <Icon size={19} color={color} />
-                </div>
-                <span style={{
-                  fontFamily:"'Inter',sans-serif", fontSize:"0.65rem", fontWeight:600,
-                  letterSpacing:"0.08em", textTransform:"uppercase",
-                  color: color, background:`rgba(${hexToRgb(color)},0.1)`,
-                  border:`1px solid rgba(${hexToRgb(color)},0.2)`,
-                  padding:"0.2rem 0.65rem", borderRadius:"999px",
-                }}>{tag}</span>
-              </div>
-              <h3 style={{
-                fontFamily:"'EB Garamond',Georgia,serif",
-                fontSize:"1.3rem", fontWeight:600, marginBottom:"0.75rem", color:"var(--text)",
-              }}>{title}</h3>
-              <p style={{
-                fontFamily:"'Inter',sans-serif", fontSize:"0.875rem",
-                fontWeight:300, color:"var(--text-muted)", lineHeight:1.7, margin:0,
-              }}>{body}</p>
+          {pains.map(p => (
+            <div key={p.num} style={{
+              position:"relative", borderRadius:16, padding:28,
+              background:`linear-gradient(160deg, ${p.glow} 0%, rgba(255,255,255,0.02) 100%)`,
+              border:`1px solid ${p.border}`,
+              backdropFilter:"blur(8px)",
+              overflow:"hidden",
+            }}>
+              {/* Large number watermark */}
+              <div aria-hidden style={{
+                position:"absolute", top:-8, right:20,
+                fontFamily:"var(--serif)", fontSize:120, fontWeight:500, lineHeight:1,
+                color:"rgba(255,255,255,0.025)", userSelect:"none", pointerEvents:"none",
+                letterSpacing:"-0.04em",
+              }}>{p.num}</div>
 
-              {/* Bottom accent line */}
+              {/* Tag */}
               <div style={{
-                marginTop:"1.5rem", height:2, borderRadius:999,
-                background:`linear-gradient(to right, ${color}, transparent)`,
-                opacity:0.4,
-              }} />
+                display:"inline-flex", alignItems:"center", gap:8,
+                marginBottom:20,
+              }}>
+                <span style={{
+                  fontFamily:"var(--mono)", fontSize:10, letterSpacing:"0.14em",
+                  textTransform:"uppercase", color:p.color,
+                }}>{p.num} · {p.tag}</span>
+              </div>
+
+              {/* Headline */}
+              <h3 style={{
+                fontFamily:"var(--serif)", fontSize:"clamp(18px,2vw,22px)",
+                fontWeight:500, lineHeight:1.25,
+                color:"var(--ink)", marginBottom:12,
+              }}>{p.headline}</h3>
+
+              {/* Body */}
+              <p style={{
+                fontSize:14, color:"var(--ink-2)", lineHeight:1.65,
+                marginBottom:28,
+              }}>{p.body}</p>
+
+              {/* Stat */}
+              <div style={{
+                paddingTop:20,
+                borderTop:`1px solid ${p.border}`,
+              }}>
+                <div style={{
+                  fontFamily:"var(--serif)", fontStyle:"italic",
+                  fontSize:"clamp(40px,5vw,54px)", lineHeight:1,
+                  color:p.color, marginBottom:6,
+                }}>{p.stat}</div>
+                <div style={{
+                  fontFamily:"var(--mono)", fontSize:11, letterSpacing:"0.06em",
+                  color:"var(--mute)", textTransform:"uppercase",
+                }}>{p.statLabel}</div>
+              </div>
             </div>
           ))}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 720px) {
+          #pains .container > div:last-child {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   );
-}
-
-function hexToRgb(hex: string): string {
-  const r = parseInt(hex.slice(1,3),16);
-  const g = parseInt(hex.slice(3,5),16);
-  const b = parseInt(hex.slice(5,7),16);
-  return `${r},${g},${b}`;
 }
