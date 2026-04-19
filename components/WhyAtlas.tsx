@@ -1,164 +1,119 @@
 "use client";
 
-import { Zap, Building2, Brain } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { Zap, Brain, Building2 } from "lucide-react";
 
-const differentiators = [
+const cards = [
   {
-    icon: Zap,
+    icon: Zap, color: "#F59E0B",
+    number: "01",
     title: "Anti-usine à gaz",
-    body:
-      "200 boutons dont vous utilisez 15% : c'est l'outil que vous subissez. Atlas est conçu pour être évident — pas puissant. Chaque clic est utile ou supprimé.",
-    quote: "Aucune formation nécessaire",
+    body: "200 boutons dont vous utilisez 15% : c'est l'outil que vous subissez. Atlas est conçu pour être évident — chaque écran a un but, chaque clic est utile ou supprimé.",
+    badge: "Aucune formation nécessaire",
   },
   {
-    icon: Brain,
+    icon: Brain, color: "#A78BFA",
+    number: "02",
     title: "Gestion d'abord, IA ensuite",
-    body:
-      "Les fondations d'abord : solides, fiables, conformes. L'IA vient amplifier ce qui fonctionne déjà — OCR, suggestions contextuelles, chronologie automatique.",
-    quote: "Crédibilité par la fiabilité",
+    body: "Les fondations d'abord : solides, fiables, conformes. L'IA amplifie ce qui fonctionne — OCR, suggestions contextuelles, chronologie automatique.",
+    badge: "Crédibilité par la fiabilité",
   },
   {
-    icon: Building2,
+    icon: Building2, color: "#34D399",
+    number: "03",
     title: "Du solo à l'équipe",
-    body:
-      "Commencez seul. Associez-vous demain. Atlas grandit avec votre cabinet — sans migration, sans disruption, sans reformat de vos données.",
-    quote: "Time-to-value dès le jour 1",
+    body: "Commencez seul. Associez-vous demain. Atlas grandit avec votre cabinet — sans migration, sans disruption, sans perte de données.",
+    badge: "Time-to-value jour 1",
   },
 ];
 
 export default function WhyAtlas() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll(".reveal").forEach(el => el.classList.add("visible"));
+        }
+      });
+    }, { threshold: 0.15 });
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section
-      id="why-atlas"
-      style={{
-        background: "var(--color-bg-alt)",
-        borderTop: "1px solid var(--color-border)",
-        borderBottom: "1px solid var(--color-border)",
-        padding: "var(--space-3xl) var(--space-xl)",
-      }}
-    >
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "var(--space-3xl)" }}>
-          <p
-            style={{
-              fontFamily: "'Lato', sans-serif",
-              fontSize: "0.75rem",
-              fontWeight: 700,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "var(--color-text-muted)",
-              marginBottom: "var(--space-md)",
-            }}
-          >
-            Pourquoi Atlas
-          </p>
-          <h2
-            style={{
-              fontFamily: "'EB Garamond', Georgia, serif",
-              fontSize: "clamp(1.9rem, 4vw, 3rem)",
-              fontWeight: 600,
-              color: "var(--color-text)",
-              letterSpacing: "-0.02em",
-              lineHeight: 1.2,
-              maxWidth: "640px",
-              margin: "0 auto",
-            }}
-          >
-            Pas un logiciel de plus. Un outil qui s&apos;efface pour vous laisser plaider.
+    <section id="why" className="section" style={{ background:"var(--bg-alt)" }} ref={ref}>
+      <div className="section-inner">
+        <div style={{ marginBottom:"3.5rem" }}>
+          <p className="section-label reveal">Pourquoi Atlas</p>
+          <h2 className="section-title reveal reveal-delay-1" style={{ maxWidth:600 }}>
+            Pas un logiciel de plus.
+            <br />
+            <em style={{ fontStyle:"italic", color:"rgba(245,158,11,0.85)" }}>Un outil qui s&apos;efface.</em>
           </h2>
         </div>
 
-        {/* Cards */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "var(--space-lg)",
-          }}
-        >
-          {differentiators.map(({ icon: Icon, title, body, quote }) => (
-            <div
-              key={title}
-              style={{
-                background: "var(--color-card)",
-                border: "1px solid var(--color-border)",
-                borderRadius: "var(--radius-lg)",
-                padding: "var(--space-xl)",
-                transition: "transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base)",
-                cursor: "default",
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLDivElement;
-                el.style.transform = "translateY(-4px)";
-                el.style.boxShadow = "var(--shadow-hover)";
-                el.style.borderColor = "rgba(30,58,138,0.3)";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLDivElement;
-                el.style.transform = "translateY(0)";
-                el.style.boxShadow = "none";
-                el.style.borderColor = "var(--color-border)";
-              }}
-            >
-              <div
-                style={{
-                  width: "48px",
-                  height: "48px",
-                  borderRadius: "var(--radius-md)",
-                  background: "rgba(30,58,138,0.08)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: "var(--space-lg)",
-                }}
-              >
-                <Icon size={22} color="var(--color-primary)" />
+        <div style={{
+          display:"grid",
+          gridTemplateColumns:"repeat(auto-fit, minmax(270px,1fr))",
+          gap:"1rem",
+        }}>
+          {cards.map(({ icon: Icon, color, number, title, body, badge }, i) => {
+            const rgb = hexToRgb(color);
+            return (
+              <div key={title} className={`glass-card reveal reveal-delay-${i+1}`}
+                style={{ padding:"2rem", position:"relative", overflow:"hidden" }}>
+                {/* Large number watermark */}
+                <div aria-hidden style={{
+                  position:"absolute", top:"-0.5rem", right:"1rem",
+                  fontFamily:"'EB Garamond',Georgia,serif",
+                  fontSize:"6rem", fontWeight:700, lineHeight:1,
+                  color:"rgba(255,255,255,0.03)", userSelect:"none",
+                  pointerEvents:"none",
+                }}>{number}</div>
+
+                <div style={{
+                  width:46, height:46, borderRadius:"0.75rem",
+                  background:`rgba(${rgb},0.1)`,
+                  border:`1px solid rgba(${rgb},0.2)`,
+                  display:"flex", alignItems:"center", justifyContent:"center",
+                  marginBottom:"1.25rem",
+                }}>
+                  <Icon size={20} color={color} />
+                </div>
+
+                <h3 style={{
+                  fontFamily:"'EB Garamond',Georgia,serif",
+                  fontSize:"1.35rem", fontWeight:600,
+                  color:"var(--text)", marginBottom:"0.75rem",
+                }}>{title}</h3>
+
+                <p style={{
+                  fontFamily:"'Inter',sans-serif", fontSize:"0.875rem",
+                  fontWeight:300, color:"var(--text-muted)",
+                  lineHeight:1.7, marginBottom:"1.5rem",
+                }}>{body}</p>
+
+                <span style={{
+                  display:"inline-flex", alignItems:"center",
+                  padding:"0.28rem 0.8rem", borderRadius:"999px",
+                  background:`rgba(${rgb},0.1)`, border:`1px solid rgba(${rgb},0.2)`,
+                  fontFamily:"'Inter',sans-serif", fontSize:"0.7rem",
+                  fontWeight:600, color, letterSpacing:"0.04em",
+                }}>{badge}</span>
               </div>
-              <h3
-                style={{
-                  fontFamily: "'EB Garamond', Georgia, serif",
-                  fontSize: "1.35rem",
-                  fontWeight: 600,
-                  color: "var(--color-text)",
-                  marginBottom: "var(--space-md)",
-                  lineHeight: 1.3,
-                }}
-              >
-                {title}
-              </h3>
-              <p
-                style={{
-                  fontFamily: "'Lato', sans-serif",
-                  fontSize: "0.92rem",
-                  fontWeight: 300,
-                  color: "var(--color-text-muted)",
-                  lineHeight: 1.7,
-                  marginBottom: "var(--space-lg)",
-                }}
-              >
-                {body}
-              </p>
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  padding: "0.3rem 0.8rem",
-                  background: "rgba(30,58,138,0.06)",
-                  borderRadius: "999px",
-                  fontFamily: "'Lato', sans-serif",
-                  fontSize: "0.75rem",
-                  fontWeight: 700,
-                  color: "var(--color-primary)",
-                  letterSpacing: "0.03em",
-                }}
-              >
-                {quote}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
   );
+}
+
+function hexToRgb(hex: string): string {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
 }
