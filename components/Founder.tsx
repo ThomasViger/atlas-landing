@@ -62,7 +62,7 @@ export default function Founder() {
             }}>Thomas Viger</h3>
 
             {[
-              { icon:"⚖️", text:"Avocat au Barreau de Rouen" },
+              { icon:"💻", text:"Développeur indépendant" },
               { icon:"📍", text:"Rouen, Normandie" },
               { icon:"🗓", text:"Fondateur Atlas · lancement sept. 2026" },
             ].map(({ icon, text }) => (
@@ -81,7 +81,7 @@ export default function Founder() {
               background:"rgba(245,158,11,0.1)", border:"1px solid rgba(245,158,11,0.25)",
               fontFamily:"var(--mono)", fontSize:10, letterSpacing:"0.1em",
               color:"var(--amber-2)", textTransform:"uppercase",
-            }}>Fondateur &amp; Avocat</div>
+            }}>Fondateur &amp; Développeur</div>
           </div>
 
           {/* Right — quote */}
@@ -102,16 +102,16 @@ export default function Founder() {
               borderLeft:"3px solid var(--amber)",
               paddingLeft:24, margin:"0 0 28px",
             }}>
-              J&apos;ai passé trop de soirées à chercher un document, recalculer une échéance,
-              relancer un client. Ce n&apos;est pas pour ça que je suis devenu avocat.
+              J&apos;ai vu des avocats passer leurs soirées à chercher un document, recalculer
+              une échéance, relancer un client. Il y avait là un outil à construire.
             </blockquote>
 
             <p style={{
               fontSize:15, color:"var(--ink-2)", lineHeight:1.75, marginBottom:28,
             }}>
-              Atlas naît d&apos;une frustration réelle, vécue de l&apos;intérieur. Pas d&apos;une étude de marché.
-              Ce qui garantit que chaque décision produit vient d&apos;un vrai besoin d&apos;avocat —
-              pas d&apos;une hypothèse de startup.
+              Atlas naît d&apos;observations terrain, pas d&apos;une étude de marché. Chaque décision
+              produit est validée avec des avocats du Barreau de Rouen, sur des cas réels —
+              pas sur une hypothèse de startup.
             </p>
 
             <a href="#tarifs"

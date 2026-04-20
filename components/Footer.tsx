@@ -15,7 +15,7 @@ const cols = [
   {
     title: "Cabinet",
     links: [
-      { label:"Barreau de Rouen", href:"#" },
+      { label:"Testeurs pilotes", href:"#" },
       { label:"Contact",          href:"mailto:contact@thomasviger.com" },
       { label:"Suivre le projet", href:"#" },
     ],
@@ -129,7 +129,7 @@ export default function Footer() {
             fontFamily:"var(--mono)", fontSize:10.5, letterSpacing:"0.04em",
             color:"rgba(255,255,255,0.18)", margin:0,
           }}>
-            © {year} Atlas · Barreau de Rouen · Tous droits réservés
+            © {year} Atlas · Édité par Thomas Viger · Tous droits réservés
           </p>
           <p style={{
             fontFamily:"var(--mono)", fontSize:10, letterSpacing:"0.04em",
