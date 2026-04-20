@@ -10,7 +10,7 @@ const diffs = [
   {
     roman: "II.",
     title: "Conçu avec des avocats",
-    body: "Pas d'une étude de marché. Conçu avec des confrères du Barreau de Rouen, sur des cas réels. Chaque décision produit vient d'un vrai besoin — pas d'une hypothèse.",
+    body: "Pas d'une étude de marché. Conçu avec des avocats du Barreau de Rouen, sur des cas réels. Chaque décision produit vient d'un vrai besoin — pas d'une hypothèse.",
     detail: "Co-construit, pas imaginé",
   },
   {

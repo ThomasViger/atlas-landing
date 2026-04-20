@@ -176,7 +176,7 @@ export default function Hero() {
             </h1>
             <p style={{ fontSize:18, color:"var(--ink-2)", maxWidth:540, marginBottom:36, lineHeight:1.55 }}>
               Atlas est le copilote pensé pour l&apos;avocat qui exerce seul. Rédaction, facturation, agenda, coffre-fort —{" "}
-              <strong style={{ color:"var(--ink)", fontWeight:500 }}>un seul outil</strong>, conçu avec des confrères du Barreau de Rouen.
+              <strong style={{ color:"var(--ink)", fontWeight:500 }}>un seul outil</strong>, conçu avec des avocats du Barreau de Rouen.
             </p>
             <WaitlistForm id="waitlist-hero" />
           </div>
