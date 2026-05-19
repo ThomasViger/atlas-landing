@@ -76,7 +76,7 @@
 .img::after {
   content: '';
   position: absolute; inset: 0;
-  background-image: radial-gradient(circle, rgba(26, 31, 58, 0.08) 1px, transparent 1px);
+  background-image: radial-gradient(circle, var(--navy-06) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 

@@ -14,6 +14,7 @@
   --bronze-light: #B08A52;
   --bronze-20:    rgba(138, 106, 50, 0.20);
   --bronze-08:    rgba(138, 106, 50, 0.08);
+  --bronze-70:    rgba(138, 106, 50, 0.70);
   --bronze-dark:  #7A5C28;
   --serif:        var(--font-cormorant), Georgia, serif;
   --sans:         var(--font-geist), system-ui, sans-serif;
