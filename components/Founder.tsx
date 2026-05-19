@@ -6,7 +6,7 @@ export default function Founder() {
     <section className={styles.section}>
       <div className={styles.grid}>
         <div className={styles.visual} data-animate="fade">
-          <span className={styles.visualLabel}>Photo — Plan de travail</span>
+          <span className={styles.visualLabel} aria-hidden="true">Photo — Plan de travail</span>
         </div>
 
         <div data-animate>

@@ -3,7 +3,7 @@ import styles from './FinalCTA.module.css'
 
 export default function FinalCTA() {
   return (
-    <section className={styles.section} id="acces">
+    <section className={styles.section} id="acces" aria-label="Demander un accès">
       <div className={styles.inner}>
         <h2 className={styles.title} data-animate>
           Il est temps de porter
@@ -13,8 +13,7 @@ export default function FinalCTA() {
         </h2>
         <a
           href="mailto:contact@thomasviger.com"
-          className="btn btn-bronze"
-          style={{ padding: '14px 36px', fontSize: '15.5px' }}
+          className="btn btn-bronze btn-xl"
         >
           Demander un accès
         </a>

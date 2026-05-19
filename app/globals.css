@@ -81,6 +81,16 @@ button { font-family: inherit; cursor: pointer; border: none; }
   transform: translateY(-1px);
 }
 
+.btn-lg {
+  padding: 13px 28px;
+  font-size: 15px;
+}
+
+.btn-xl {
+  padding: 14px 36px;
+  font-size: 15.5px;
+}
+
 .gradient-text {
   background: linear-gradient(135deg, var(--bronze) 0%, var(--bronze-light) 50%, var(--bronze) 100%);
   -webkit-background-clip: text;

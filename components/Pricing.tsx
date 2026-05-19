@@ -20,20 +20,20 @@ export default function Pricing() {
       <h2 className={styles.title}>Simple. Tout inclus.</h2>
 
       <div className={styles.card} data-animate>
-        <div className={styles.prices}>
+        <dl className={styles.prices}>
           <div>
-            <div className={styles.priceAmount}>
+            <dt className={styles.priceLabel}>Avocat solo</dt>
+            <dd className={styles.priceAmount}>
               49 €<span className={styles.pricePeriod}>/mois</span>
-            </div>
-            <div className={styles.priceLabel}>Avocat solo</div>
+            </dd>
           </div>
           <div>
-            <div className={styles.priceAmount}>
+            <dt className={styles.priceLabel}>Par collaborateur · Cabinet 2–10</dt>
+            <dd className={styles.priceAmount}>
               99 €<span className={styles.pricePeriod}>/mois</span>
-            </div>
-            <div className={styles.priceLabel}>Par collaborateur · Cabinet 2–10</div>
+            </dd>
           </div>
-        </div>
+        </dl>
 
         <ul className={styles.list}>
           {includes.map((item) => (
@@ -44,8 +44,7 @@ export default function Pricing() {
         <div className={styles.cta}>
           <a
             href="#acces"
-            className="btn btn-bronze"
-            style={{ padding: '13px 32px', fontSize: '15px' }}
+            className="btn btn-bronze btn-lg"
           >
             Demander un accès
           </a>

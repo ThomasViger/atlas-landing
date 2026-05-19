@@ -41,6 +41,5 @@
   font-family: var(--serif);
   font-style: italic;
   font-size: 14px;
-  color: var(--bronze);
-  opacity: 0.7;
+  color: var(--bronze-70);
 }

@@ -23,8 +23,7 @@ export default function Hero() {
       <div className={styles.ctaRow}>
         <a
           href="#acces"
-          className="btn btn-bronze"
-          style={{ padding: '13px 28px', fontSize: '15px' }}
+          className="btn btn-bronze btn-lg"
         >
           Demander un accès
         </a>
