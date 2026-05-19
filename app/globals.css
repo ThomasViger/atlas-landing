@@ -13,6 +13,7 @@
   --bronze-light: #B08A52;
   --bronze-20:    rgba(138, 106, 50, 0.20);
   --bronze-08:    rgba(138, 106, 50, 0.08);
+  --bronze-dark:  #7A5C28;
   --serif:        var(--font-cormorant), Georgia, serif;
   --sans:         var(--font-geist), system-ui, sans-serif;
   --mono:         var(--font-geist-mono), monospace;
@@ -21,7 +22,7 @@
 /* ── BASE ────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; }
 
 body {
   background: var(--ivory);
@@ -72,7 +73,7 @@ button { font-family: inherit; cursor: pointer; border: none; }
 }
 
 .btn-bronze:hover {
-  background: #7A5C28;
+  background: var(--bronze-dark);
   box-shadow: 0 1px 3px rgba(138, 106, 50, 0.35),
               0 12px 28px -8px rgba(138, 106, 50, 0.50);
   transform: translateY(-1px);
