@@ -4,6 +4,7 @@
 :root {
   --ivory:        #F8F7F4;
   --ivory-2:      #F0EDE6;
+  --ivory-90:     rgba(248, 247, 244, 0.90);
   --navy:         #1A1F3A;
   --navy-70:      rgba(26, 31, 58, 0.70);
   --navy-40:      rgba(26, 31, 58, 0.40);
