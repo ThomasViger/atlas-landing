@@ -1,0 +1,100 @@
+/* components/Features.module.css */
+.section {
+  padding: 120px 40px 0;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 96px;
+}
+
+.block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  padding: 72px 0;
+  border-top: 0.5px solid var(--navy-12);
+}
+
+.block:last-child {
+  border-bottom: 0.5px solid var(--navy-12);
+}
+
+.blockReverse .text { order: 2; }
+.blockReverse .img  { order: 1; }
+
+.num {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  color: var(--bronze);
+  margin-bottom: 18px;
+  display: block;
+}
+
+.title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(38px, 4.5vw, 56px);
+  line-height: 1.0;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+.desc {
+  font-family: var(--sans);
+  font-size: 16.5px;
+  color: var(--navy-70);
+  line-height: 1.7;
+  max-width: 400px;
+}
+
+.img {
+  aspect-ratio: 4 / 3;
+  background: var(--ivory-2);
+  border: 1.5px solid var(--bronze);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.img::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(
+    ellipse at 60% 40%,
+    var(--bronze-08) 0%,
+    transparent 60%
+  );
+}
+
+.img::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(26, 31, 58, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.imgLabel {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--navy-40);
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .block {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .blockReverse .text { order: 1; }
+  .blockReverse .img  { order: 2; }
+}
