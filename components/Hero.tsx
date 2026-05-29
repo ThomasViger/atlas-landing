@@ -11,13 +11,13 @@ export default function Hero() {
 
       <h1 className={styles.title} data-animate>
         Portez votre{' '}
-        <span className="gradient-text">cabinet.</span>
+        <span className="accent">cabinet.</span>
         <br />
         Sans porter le poids.
       </h1>
 
       <p className={styles.sub} data-animate>
-        Le logiciel de gestion pour avocats solos et cabinets 1 à 5 collaborateurs.
+        Le logiciel de gestion fait en France, pour l'avocat seul comme pour les cabinets de 1 à 5.
       </p>
 
       <div className={styles.ctaRow}>
@@ -25,10 +25,10 @@ export default function Hero() {
           href="#acces"
           className="btn btn-bronze btn-lg"
         >
-          Demander un accès
+          Être prévenu à l'ouverture
         </a>
         <span className={styles.ctaNote}>
-          30 jours d'essai gratuit · Aucune carte requise
+          Les premiers cabinets à nous rejoindre garderont leur tarif, à vie.
         </span>
       </div>
 

@@ -91,11 +91,9 @@ button { font-family: inherit; cursor: pointer; border: none; }
   font-size: 15.5px;
 }
 
-.gradient-text {
-  background: linear-gradient(135deg, var(--bronze) 0%, var(--bronze-light) 50%, var(--bronze) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* Accent typographique : aplat bronze (zéro gradient text — cf. .impeccable, « matière avant effet ») */
+.accent {
+  color: var(--bronze);
 }
 
 .section-label {

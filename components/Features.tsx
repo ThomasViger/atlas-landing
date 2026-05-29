@@ -3,9 +3,9 @@ import styles from './Features.module.css'
 
 const modules = [
   {
-    num: '01 — Dossiers',
+    num: '01 — Dossiers & clients',
     title: 'Chaque affaire,\nà portée de main.',
-    desc: 'Échéances, parties, documents — tout au même endroit, jamais à chercher.',
+    desc: 'Échéances, parties, clients, documents — au même endroit. La détection des conflits d\'intérêts est intégrée, vérifiée à l\'ouverture du dossier.',
     label: 'Screenshot — Dossiers',
     reverse: false,
   },
@@ -18,8 +18,8 @@ const modules = [
   },
   {
     num: '03 — Facturation',
-    title: 'Factures conformes\nen deux minutes.',
-    desc: 'PDF légalement conformes, TVA, acomptes, avoirs. Archivées automatiquement dans le dossier.',
+    title: 'Prête pour la facture\nélectronique 2026.',
+    desc: 'Factures conformes, Factur-X, TVA, acomptes, avoirs — archivées dans le dossier. La réforme 2026, déjà intégrée.',
     label: 'Screenshot — Facturation',
     reverse: false,
   },

@@ -8,9 +8,9 @@ export default function Navbar() {
         <span className={styles.logo}>Atlas</span>
         <div className={styles.links}>
           <a href="#modules" className={styles.link}>Produit</a>
-          <a href="#tarifs" className={styles.link}>Tarifs</a>
+          <a href="#tarifs" className={styles.link}>L'engagement</a>
         </div>
-        <a href="#acces" className="btn btn-bronze">Demander un accès</a>
+        <a href="#acces" className="btn btn-bronze">Être prévenu</a>
       </div>
     </nav>
   )

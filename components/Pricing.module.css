@@ -36,36 +36,18 @@
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--bronze) 0%, var(--bronze-light) 50%, var(--bronze) 100%);
+  background: var(--bronze);
 }
 
-.prices {
-  display: flex;
-  gap: 48px;
-  padding-bottom: 36px;
-  margin-bottom: 36px;
-  border-bottom: 0.5px solid var(--navy-12);
-}
-
-.priceAmount {
-  font-family: var(--serif);
-  font-size: 44px;
-  color: var(--navy);
-  line-height: 1;
-  letter-spacing: -0.025em;
-}
-
-.pricePeriod {
+.lede {
   font-family: var(--sans);
   font-size: 16px;
   font-weight: 300;
-}
-
-.priceLabel {
-  font-family: var(--sans);
-  font-size: 13px;
+  line-height: 1.6;
   color: var(--navy-70);
-  margin-top: 6px;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+  border-bottom: 0.5px solid var(--navy-12);
 }
 
 .list {

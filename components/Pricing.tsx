@@ -2,12 +2,12 @@
 import styles from './Pricing.module.css'
 
 const includes = [
-  'Les 4 modules : dossiers, agenda, facturation, documents',
+  'Tous les modules : dossiers, clients, agenda, facturation, documents, temps',
+  'Détection des conflits d\'intérêts',
+  'Facturation électronique 2026 (Factur-X)',
   'Alertes automatiques sur les délais procéduraux',
-  'Facturation PDF légalement conforme',
-  'Hébergement France, sauvegardes incluses',
-  'Support email en français',
-  'Mises à jour incluses — pas de version "Pro" cachée',
+  'Hébergement France, base isolée par cabinet',
+  'Aucune version « Pro » cachée, aucun module à débloquer',
 ]
 
 export default function Pricing() {
@@ -15,25 +15,15 @@ export default function Pricing() {
     <section className={styles.section} id="tarifs">
       <span className={`section-label ${styles.label}`}>
         <span className="section-label-dot" />
-        Tarifs
+        L'engagement
       </span>
-      <h2 className={styles.title}>Simple. Tout inclus.</h2>
+      <h2 className={styles.title}>Un seul prix. Tout sera dedans.</h2>
 
       <div className={styles.card} data-animate>
-        <dl className={styles.prices}>
-          <div>
-            <dt className={styles.priceLabel}>Avocat solo</dt>
-            <dd className={styles.priceAmount}>
-              49 €<span className={styles.pricePeriod}>/mois</span>
-            </dd>
-          </div>
-          <div>
-            <dt className={styles.priceLabel}>Par collaborateur · Cabinet 2–10</dt>
-            <dd className={styles.priceAmount}>
-              99 €<span className={styles.pricePeriod}>/mois</span>
-            </dd>
-          </div>
-        </dl>
+        <p className={styles.lede}>
+          Atlas n'aura pas de paliers à déchiffrer, pas de fonction réservée à une offre
+          supérieure. Un prix, clair, pour l'avocat seul. C'est tout.
+        </p>
 
         <ul className={styles.list}>
           {includes.map((item) => (
@@ -46,10 +36,10 @@ export default function Pricing() {
             href="#acces"
             className="btn btn-bronze btn-lg"
           >
-            Demander un accès
+            Être prévenu à l'ouverture
           </a>
           <p className={styles.note}>
-            30 jours d'essai gratuit · Aucune carte bancaire requise
+            Atlas est jeune. Les premiers cabinets à nous rejoindre garderont leur tarif, à vie.
           </p>
         </div>
       </div>
