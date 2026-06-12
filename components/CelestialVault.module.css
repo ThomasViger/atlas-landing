@@ -1,14 +1,19 @@
 /* components/CelestialVault.module.css */
 .section {
-  /* Le "moment bleu nuit" — seule section non-neutre, la voûte émerge du noir */
-  background: linear-gradient(
-    180deg,
-    var(--bg) 0%,
-    var(--night) 14%,
-    var(--night) 86%,
-    var(--bg) 100%
-  );
-  min-height: 60vh;
+  /* Le "moment bleu nuit" — la voûte émerge du noir, avec des
+     nébulosités bleu profond et un souffle bronze. */
+  background:
+    radial-gradient(ellipse 85% 70% at 50% 38%, rgba(28, 36, 82, 0.50) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 38% at 76% 18%, rgba(138, 106, 50, 0.12) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 32% at 18% 80%, rgba(138, 106, 50, 0.08) 0%, transparent 65%),
+    linear-gradient(
+      180deg,
+      var(--bg) 0%,
+      var(--night) 14%,
+      var(--night) 86%,
+      var(--bg) 100%
+    );
+  min-height: 68vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,25 +22,7 @@
   overflow: hidden;
 }
 
-.glow {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.glowTop {
-  top: -200px; right: -200px;
-  width: 700px; height: 700px;
-  background: radial-gradient(circle, var(--bronze-12) 0%, transparent 60%);
-}
-
-.glowBottom {
-  bottom: -200px; left: -200px;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, var(--bronze-12) 0%, transparent 60%);
-}
-
-.svg {
+.sky {
   position: absolute;
   inset: 0;
   width: 100%;
