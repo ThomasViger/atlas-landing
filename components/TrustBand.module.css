@@ -25,7 +25,7 @@
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: var(--accent);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   display: block;
 }
 
@@ -38,9 +38,27 @@
 
 @media (max-width: 768px) {
   .grid { grid-template-columns: 1fr 1fr; }
-  .item { border-left: 0.5px solid var(--border); }
+  .item {
+    border-left: 0.5px solid var(--border);
+    padding: 28px 20px;
+  }
 }
 
+/* Mobile : liste compacte à filets — plus de cellules flottantes */
 @media (max-width: 480px) {
-  .grid { grid-template-columns: 1fr; }
+  .grid {
+    grid-template-columns: 1fr;
+    border-top: none;
+    border-bottom: none;
+    padding: 0 var(--page-x);
+  }
+  .item {
+    border: none;
+    border-top: 0.5px solid var(--border);
+    padding: 18px 0;
+  }
+  .item:last-child {
+    border-bottom: 0.5px solid var(--border);
+  }
+  .tag { margin-bottom: 5px; }
 }
