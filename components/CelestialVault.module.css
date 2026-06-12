@@ -1,6 +1,13 @@
 /* components/CelestialVault.module.css */
 .section {
-  background: var(--navy);
+  /* Le "moment bleu nuit" — seule section non-neutre, la voûte émerge du noir */
+  background: linear-gradient(
+    180deg,
+    var(--bg) 0%,
+    var(--night) 14%,
+    var(--night) 86%,
+    var(--bg) 100%
+  );
   min-height: 60vh;
   display: flex;
   align-items: center;
@@ -19,13 +26,13 @@
 .glowTop {
   top: -200px; right: -200px;
   width: 700px; height: 700px;
-  background: radial-gradient(circle, var(--bronze-08) 0%, transparent 60%);
+  background: radial-gradient(circle, var(--bronze-12) 0%, transparent 60%);
 }
 
 .glowBottom {
   bottom: -200px; left: -200px;
   width: 600px; height: 600px;
-  background: radial-gradient(circle, var(--bronze-08) 0%, transparent 60%);
+  background: radial-gradient(circle, var(--bronze-12) 0%, transparent 60%);
 }
 
 .svg {
