@@ -1,6 +1,6 @@
 /* components/Founder.module.css */
 .section {
-  padding: 120px 40px;
+  padding: var(--section-py) var(--page-x);
 }
 
 .grid {

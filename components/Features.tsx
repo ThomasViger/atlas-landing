@@ -41,6 +41,11 @@ export default function Features() {
             <span className="section-label-dot" />
             Les modules
           </span>
+          <h2 className={styles.headerTitle} data-animate>
+            Quatre modules.
+            <br />
+            Tout le cabinet.
+          </h2>
         </div>
 
         {modules.map((mod) => (

@@ -45,7 +45,7 @@
 .inner {
   position: relative;
   z-index: 2;
-  padding: 120px 40px;
+  padding: var(--section-py) var(--page-x);
 }
 
 .label {

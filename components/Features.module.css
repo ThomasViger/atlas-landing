@@ -1,11 +1,21 @@
 /* components/Features.module.css */
 .section {
-  padding: 120px 40px 0;
+  padding: var(--section-py) var(--page-x) 0;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 96px;
+  margin-bottom: 56px;
+}
+
+.headerTitle {
+  font-family: var(--display);
+  font-size: clamp(40px, 6vw, 84px);
+  line-height: 1.04;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-top: 20px;
 }
 
 .block {
