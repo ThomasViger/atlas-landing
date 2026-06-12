@@ -59,11 +59,6 @@ export default function Hero() {
         <span className="accent">Sans en porter le poids.</span>
       </p>
 
-      <p className={styles.sub} data-hero="fade-up">
-        Le logiciel de gestion fait en France, pour l'avocat seul comme pour les
-        cabinets de 1 à 5.
-      </p>
-
       <div className={styles.ctaRow} data-hero="fade-up">
         <a href="#acces" className="btn btn-bronze btn-lg">
           Être prévenu à l'ouverture
