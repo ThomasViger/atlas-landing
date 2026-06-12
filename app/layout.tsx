@@ -1,6 +1,13 @@
-import type { Metadata } from 'next'
-import { Cormorant, Geist, Geist_Mono } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import { Anton, Cormorant, Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
+
+const anton = Anton({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-display',
+  display: 'swap',
+})
 
 const cormorant = Cormorant({
   subsets: ['latin'],
@@ -21,6 +28,10 @@ const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   display: 'swap',
 })
+
+export const viewport: Viewport = {
+  themeColor: '#0A0A0C',
+}
 
 export const metadata: Metadata = {
   title: 'Atlas — Portez votre cabinet. Sans porter le poids.',
@@ -43,7 +54,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${cormorant.variable} ${geist.variable} ${geistMono.variable}`}
+      className={`${anton.variable} ${cormorant.variable} ${geist.variable} ${geistMono.variable}`}
     >
       <body>{children}</body>
     </html>
