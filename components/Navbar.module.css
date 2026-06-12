@@ -5,20 +5,12 @@
   left: 0;
   right: 0;
   z-index: 100;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  padding: 0 40px;
-  background: var(--ivory-90);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 0.5px solid var(--navy-12);
-  transition: background 0.3s ease;
+  padding: 20px 40px;
+  transition: padding var(--dur-slow) var(--ease);
 }
 
 .inner {
   max-width: 1200px;
-  width: 100%;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -28,30 +20,38 @@
 .logo {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 21px;
+  font-size: 26px;
   color: var(--navy);
   letter-spacing: -0.01em;
 }
 
-.links {
-  display: flex;
-  gap: 32px;
+/* Pseudo-élément pour le blur — évite les problèmes de stacking context */
+.nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border-bottom: 0.5px solid transparent;
+  transition: background var(--dur-slow) var(--ease),
+              border-color var(--dur-slow) var(--ease);
+  pointer-events: none;
+  z-index: -1;
 }
 
-.link {
-  font-family: var(--sans);
-  font-size: 13.5px;
-  color: var(--navy-70);
-  text-decoration: none;
-  transition: color 0.2s;
+.scrolled {
+  padding-top: 14px;
+  padding-bottom: 14px;
 }
 
-.link:hover {
-  color: var(--navy);
+.scrolled::before {
+  background: rgba(248, 247, 244, 0.72);
+  border-bottom-color: var(--navy-12);
 }
 
-@media (max-width: 640px) {
-  .links {
-    display: none;
+@supports (backdrop-filter: blur(1px)) {
+  .scrolled::before {
+    background: rgba(248, 247, 244, 0.45);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
   }
 }

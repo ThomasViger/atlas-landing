@@ -2,6 +2,7 @@
 
 /* ── TOKENS ─────────────────────────────── */
 :root {
+  /* Couleurs */
   --ivory:        #F8F7F4;
   --ivory-2:      #F0EDE6;
   --ivory-90:     rgba(248, 247, 244, 0.90);
@@ -16,9 +17,45 @@
   --bronze-08:    rgba(138, 106, 50, 0.08);
   --bronze-70:    rgba(138, 106, 50, 0.70);
   --bronze-dark:  #7A5C28;
-  --serif:        var(--font-cormorant), Georgia, serif;
-  --sans:         var(--font-geist), system-ui, sans-serif;
-  --mono:         var(--font-geist-mono), monospace;
+
+  /* Polices */
+  --serif:  var(--font-cormorant), Georgia, serif;
+  --sans:   var(--font-geist), system-ui, sans-serif;
+  --mono:   var(--font-geist-mono), monospace;
+
+  /* Échelle typographique — Perfect Fourth × 1.333, base 18px */
+  --text-xs:   12px;    /* labels mono, notes */
+  --text-sm:   13.5px;  /* liens nav, metadata */
+  --text-base: 18px;    /* corps de texte */
+  --text-md:   24px;    /* sous-titres */
+  --text-lg:   32px;    /* titres secondaires */
+  --text-xl:   43px;    /* titres de section */
+  --text-2xl:  57px;    /* grand titre section */
+  --text-3xl:  76px;    /* hero display */
+
+  /* Espacement — grille 8px */
+  --space-1:  8px;
+  --space-2:  16px;
+  --space-3:  24px;
+  --space-4:  32px;
+  --space-5:  40px;
+  --space-6:  48px;
+  --space-8:  64px;
+  --space-10: 80px;
+  --space-12: 96px;
+  --space-16: 128px;
+  --space-20: 160px;
+
+  /* Sémantiques d'espacement */
+  --section-py: 128px;
+  --page-x:     40px;
+
+  /* Animation — valeurs Stripe vérifiées */
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-slow: 400ms;
+  --ease:     cubic-bezier(0.2, 1, 0.2, 1);
+  --ease-std: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ── BASE ────────────────────────────────── */
@@ -30,10 +67,10 @@ body {
   background: var(--ivory);
   color: var(--navy);
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: var(--text-base);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -43,7 +80,7 @@ button { font-family: inherit; cursor: pointer; border: none; }
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 var(--page-x);
 }
 
 .section-divider {
@@ -55,13 +92,14 @@ button { font-family: inherit; cursor: pointer; border: none; }
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 22px;
+  gap: var(--space-1);
+  padding: 11px 24px;
   border-radius: 6px;
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: var(--text-sm);
   font-weight: 500;
-  transition: all 0.25s ease;
+  letter-spacing: 0.01em;
+  transition: all var(--dur-base) var(--ease);
   cursor: pointer;
   border: none;
   text-decoration: none;
@@ -83,15 +121,14 @@ button { font-family: inherit; cursor: pointer; border: none; }
 
 .btn-lg {
   padding: 13px 28px;
-  font-size: 15px;
+  font-size: var(--text-base);
 }
 
 .btn-xl {
-  padding: 14px 36px;
-  font-size: 15.5px;
+  padding: 15px var(--space-5);
+  font-size: var(--text-base);
 }
 
-/* Accent typographique : aplat bronze (zéro gradient text — cf. .impeccable, « matière avant effet ») */
 .accent {
   color: var(--bronze);
 }
@@ -99,11 +136,11 @@ button { font-family: inherit; cursor: pointer; border: none; }
 .section-label {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-1);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: var(--text-xs);
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   color: var(--bronze);
 }
 
@@ -121,10 +158,9 @@ button { font-family: inherit; cursor: pointer; border: none; }
   50%       { opacity: 0.5; transform: scale(0.7); }
 }
 
-/* Scroll reveal — état initial */
 [data-animate] {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(24px);
 }
 
 [data-animate="fade"] {

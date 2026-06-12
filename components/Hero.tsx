@@ -1,30 +1,22 @@
 // components/Hero.tsx
-import styles from './Hero.module.css'
+import styles from "./Hero.module.css";
 
 export default function Hero() {
   return (
     <section className={styles.hero}>
-      <div className={styles.eyebrow}>
-        <span className={styles.eyebrowDot} />
-        Fait en France · Pour les avocats
-      </div>
-
-      <h1 className={styles.title} data-animate>
-        Portez votre{' '}
-        <span className="accent">cabinet.</span>
+<h1 className={styles.title} data-animate>
+        Portez votre <span className="accent">cabinet.</span>
         <br />
-        Sans porter le poids.
+        Sans en porter le poids.
       </h1>
 
       <p className={styles.sub} data-animate>
-        Le logiciel de gestion fait en France, pour l'avocat seul comme pour les cabinets de 1 à 5.
+        Le logiciel de gestion fait en France, pour l'avocat seul comme pour les
+        cabinets de 1 à 5.
       </p>
 
       <div className={styles.ctaRow}>
-        <a
-          href="#acces"
-          className="btn btn-bronze btn-lg"
-        >
+        <a href="#acces" className="btn btn-bronze btn-lg">
           Être prévenu à l'ouverture
         </a>
         <span className={styles.ctaNote}>
@@ -44,5 +36,5 @@ export default function Hero() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -29,10 +29,10 @@
 
 .links a {
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--navy-40);
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color var(--dur-base) var(--ease);
 }
 
 .links a:hover { color: var(--navy); }
@@ -40,6 +40,6 @@
 .sig {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 14px;
+  font-size: var(--text-sm);
   color: var(--bronze-70);
 }

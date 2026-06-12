@@ -43,7 +43,7 @@
 
 .label {
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: 0.22em;
   color: var(--bronze-70);
@@ -54,7 +54,7 @@
 .quote {
   font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(30px, 4vw, 50px);
+  font-size: clamp(32px, 4vw, 50px);
   color: var(--ivory);
   line-height: 1.2;
   max-width: 680px;

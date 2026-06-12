@@ -36,9 +36,9 @@
   align-items: center;
   gap: 10px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--text-xs);
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   color: var(--bronze);
   margin-bottom: 36px;
   padding: 6px 16px;
@@ -72,10 +72,10 @@
 
 .sub {
   font-family: var(--sans);
-  font-size: 18px;
+  font-size: var(--text-base);
   color: var(--navy-70);
   max-width: 520px;
-  line-height: 1.55;
+  line-height: 1.65;
   margin-bottom: 44px;
   position: relative;
   z-index: 1;
@@ -94,7 +94,7 @@
 
 .ctaNote {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--text-xs);
   color: var(--navy-40);
   letter-spacing: 0.08em;
 }
@@ -129,7 +129,7 @@
 
 .frameLabel {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--navy-40);
@@ -150,6 +150,5 @@
 
 @media (max-width: 640px) {
   .title { font-size: clamp(44px, 12vw, 72px); }
-  .sub { font-size: 16px; }
   .ctaRow { flex-direction: column; }
 }
