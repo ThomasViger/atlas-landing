@@ -33,9 +33,10 @@
 
 .word {
   position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
   font-family: var(--display);
   font-weight: 400;
   font-size: var(--text-display);
@@ -60,16 +61,28 @@
 }
 
 .statue img {
-  height: 92%;
+  height: 170%;
   width: auto;
   object-fit: contain;
+  /* Les pieds de la statue se dissolvent dans le noir : le texte
+     en dessous reste lisible et la coupe paraît intentionnelle. */
+  -webkit-mask-image: linear-gradient(180deg, #000 76%, transparent 94%);
+  mask-image: linear-gradient(180deg, #000 76%, transparent 94%);
 }
 
-/* Duplicata clippé : seule la moitié haute des lettres repasse devant
-   la statue — l'entrelacement texte/statue. */
+/* Duplicata clippé : la moitié haute des lettres repasse devant la
+   statue, et le L entier (colonne 41-59%) reste au premier plan —
+   sinon sa barre horizontale disparaît derrière le torse et
+   « ATLAS » se lit « ATIAS ». Les % sont relatifs au mot lui-même
+   (width: max-content), donc stables à toutes les tailles. */
 .wordFront {
   z-index: 3;
-  clip-path: inset(0 0 55% 0);
+  clip-path: polygon(
+    0 0, 100% 0, 100% 45%,
+    59% 45%, 59% 100%,
+    41% 100%, 41% 45%,
+    0 45%
+  );
   user-select: none;
   pointer-events: none;
 }
@@ -97,7 +110,7 @@
   letter-spacing: -0.015em;
   margin: 40px 0 16px;
   position: relative;
-  z-index: 1;
+  z-index: 4; /* au-dessus de la statue (2) et du texte avant (3) */
 }
 
 .sub {
@@ -108,7 +121,7 @@
   line-height: 1.65;
   margin-bottom: 44px;
   position: relative;
-  z-index: 1;
+  z-index: 4;
 }
 
 .ctaRow {
@@ -118,7 +131,7 @@
   flex-wrap: wrap;
   justify-content: center;
   position: relative;
-  z-index: 1;
+  z-index: 4;
 }
 
 .ctaNote {
@@ -131,8 +144,7 @@
 @media (max-width: 640px) {
   .hero { padding: 100px 24px 64px; }
   .stage { height: min(42vh, 380px); }
-  .statue img { height: 80%; opacity: 0.85; }
-  .wordFront { clip-path: inset(0 0 45% 0); }
+  .statue img { height: 130%; opacity: 0.9; }
   .tagline { font-size: 22px; }
   .ctaRow { flex-direction: column; }
 }
