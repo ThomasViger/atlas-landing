@@ -25,6 +25,33 @@
   align-items: center;
   padding: 72px 0;
   border-top: 0.5px solid var(--border);
+  position: relative;
+}
+
+/* Numéro fantôme — contour Anton géant derrière chaque module */
+.ghost {
+  position: absolute;
+  top: 28px;
+  left: -24px;
+  font-family: var(--display);
+  font-size: clamp(140px, 18vw, 260px);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(248, 247, 244, 0.07);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.blockReverse .ghost {
+  left: auto;
+  right: -24px;
+}
+
+.text,
+.img {
+  position: relative;
+  z-index: 1;
 }
 
 .block:last-child {

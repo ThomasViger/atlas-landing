@@ -53,6 +53,9 @@ export default function Features() {
             key={mod.num}
             className={`${styles.block} ${mod.reverse ? styles.blockReverse : ''}`}
           >
+            <span className={styles.ghost} aria-hidden="true">
+              {mod.num.slice(0, 2)}
+            </span>
             <div className={styles.text} data-animate>
               <span className={styles.num}>{mod.num}</span>
               <h2 className={styles.title}>
