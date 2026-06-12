@@ -208,8 +208,14 @@ button { font-family: inherit; cursor: pointer; border: none; }
   transform: none;
 }
 
+/* Intro du hero — états initiaux, animés par HeroIntro.tsx */
+[data-hero] {
+  opacity: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  [data-animate] {
+  [data-animate],
+  [data-hero] {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
