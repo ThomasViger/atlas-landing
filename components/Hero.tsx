@@ -4,9 +4,9 @@ import styles from './Hero.module.css'
 import HeroIntro from './HeroIntro'
 
 // Chemin de l'image statue détourée (PNG/WebP alpha) dans public/.
-// Tant que l'image n'est pas livrée, laisser à null : le hero rend une
-// lueur bronze à la place et n'affiche pas le calque de texte avant.
-const STATUE_SRC: string | null = null
+// Si remis à null : le hero rend une lueur bronze à la place et
+// n'affiche pas le calque de texte avant.
+const STATUE_SRC: string | null = '/statue-atlas.webp'
 
 export default function Hero() {
   return (
@@ -25,13 +25,16 @@ export default function Hero() {
         {STATUE_SRC ? (
           <>
             <div className={styles.statue} data-hero="statue">
+              {/* unoptimized : le WebP alpha est déjà compressé à la main (246 Ko) ;
+                  l'optimiseur Next peut renvoyer du JPEG (sans alpha) selon le
+                  header Accept, ce qui casserait la transparence. */}
               <Image
                 src={STATUE_SRC}
                 alt=""
                 priority
-                width={1024}
-                height={1280}
-                sizes="(max-width: 640px) 80vw, (max-width: 1280px) 50vw, 640px"
+                unoptimized
+                width={1086}
+                height={1448}
               />
             </div>
             <span
