@@ -14,14 +14,33 @@
   --bronze:       #8A6A32;
   --bronze-light: #B08A52;
   --bronze-20:    rgba(138, 106, 50, 0.20);
+  --bronze-12:    rgba(138, 106, 50, 0.12);
   --bronze-08:    rgba(138, 106, 50, 0.08);
   --bronze-70:    rgba(138, 106, 50, 0.70);
   --bronze-dark:  #7A5C28;
+  --black:        #0A0A0C;
+  --charcoal:     #131316;
+  --charcoal-2:   #1A1A1E;
+  --night:        #10142A;
+
+  /* Sémantiques — fond sombre. Les composants consomment cette couche,
+     jamais les tokens navy/ivory bruts directement pour les rôles fond/texte. */
+  --bg:          var(--black);
+  --surface:     var(--charcoal);
+  --surface-2:   var(--charcoal-2);
+  --text:        var(--ivory);
+  --text-70:     rgba(248, 247, 244, 0.72);
+  --text-50:     rgba(248, 247, 244, 0.55);
+  --border:      rgba(248, 247, 244, 0.12);
+  --border-soft: rgba(248, 247, 244, 0.06);
+  --accent:      var(--bronze-light);  /* texte accent : AA sur fond noir */
+  --accent-deep: var(--bronze);        /* fonds, bordures, lueurs uniquement */
 
   /* Polices */
-  --serif:  var(--font-cormorant), Georgia, serif;
-  --sans:   var(--font-geist), system-ui, sans-serif;
-  --mono:   var(--font-geist-mono), monospace;
+  --serif:   var(--font-cormorant), Georgia, serif;
+  --sans:    var(--font-geist), system-ui, sans-serif;
+  --mono:    var(--font-geist-mono), monospace;
+  --display: var(--font-display), Impact, sans-serif;
 
   /* Échelle typographique — Perfect Fourth × 1.333, base 18px */
   --text-xs:   12px;    /* labels mono, notes */
@@ -32,6 +51,7 @@
   --text-xl:   43px;    /* titres de section */
   --text-2xl:  57px;    /* grand titre section */
   --text-3xl:  76px;    /* hero display */
+  --text-display: clamp(88px, 17vw, 280px);  /* mot ATLAS monumental */
 
   /* Espacement — grille 8px */
   --space-1:  8px;
@@ -61,11 +81,14 @@
 /* ── BASE ────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: auto; }
+html {
+  scroll-behavior: auto;
+  color-scheme: dark;
+}
 
 body {
-  background: var(--ivory);
-  color: var(--navy);
+  background: var(--bg);
+  color: var(--text);
   font-family: var(--sans);
   font-size: var(--text-base);
   line-height: 1.6;
@@ -86,7 +109,19 @@ button { font-family: inherit; cursor: pointer; border: none; }
 .section-divider {
   width: 100%;
   height: 0.5px;
-  background: var(--navy-12);
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }
 
 .btn {
@@ -119,6 +154,11 @@ button { font-family: inherit; cursor: pointer; border: none; }
   transform: translateY(-1px);
 }
 
+.btn:focus-visible {
+  outline: 2px solid var(--bronze-light);
+  outline-offset: 3px;
+}
+
 .btn-lg {
   padding: 13px 28px;
   font-size: var(--text-base);
@@ -130,7 +170,7 @@ button { font-family: inherit; cursor: pointer; border: none; }
 }
 
 .accent {
-  color: var(--bronze);
+  color: var(--accent);
 }
 
 .section-label {
@@ -141,14 +181,14 @@ button { font-family: inherit; cursor: pointer; border: none; }
   font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: var(--bronze);
+  color: var(--accent);
 }
 
 .section-label-dot {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: var(--bronze);
+  background: var(--accent);
   flex-shrink: 0;
 }
 

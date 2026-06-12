@@ -14,8 +14,9 @@
 
 .visual {
   aspect-ratio: 1;
-  background: var(--ivory-2);
-  border: 1.5px solid var(--bronze);
+  background: var(--surface);
+  border: 1px solid var(--bronze-20);
+  box-shadow: inset 0 0 60px rgba(138, 106, 50, 0.06);
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -27,7 +28,7 @@
 .visual::before {
   content: '';
   position: absolute; inset: 0;
-  background-image: radial-gradient(circle, var(--navy-06) 1px, transparent 1px);
+  background-image: radial-gradient(circle, var(--border-soft) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 
@@ -36,7 +37,7 @@
   font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--navy-40);
+  color: var(--text-50);
   position: relative;
   z-index: 1;
 }
@@ -49,7 +50,7 @@
 .intro {
   font-family: var(--sans);
   font-size: var(--text-base);
-  color: var(--navy);
+  color: var(--text);
   line-height: 1.6;
   margin-bottom: 20px;
 }
@@ -57,7 +58,7 @@
 .body {
   font-family: var(--sans);
   font-size: var(--text-base);
-  color: var(--navy-70);
+  color: var(--text-70);
   line-height: 1.75;
 }
 
@@ -68,7 +69,7 @@
   font-family: var(--serif);
   font-style: italic;
   font-size: 28px;
-  color: var(--bronze);
+  color: var(--accent);
   letter-spacing: -0.01em;
   margin-top: 36px;
   padding-top: 28px;

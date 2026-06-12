@@ -14,7 +14,7 @@
   font-style: italic;
   font-size: clamp(32px, 3.5vw, 43px);
   line-height: 1.2;
-  color: var(--navy);
+  color: var(--text);
   letter-spacing: -0.015em;
   margin-bottom: 28px;
 }
@@ -22,11 +22,11 @@
 .body {
   font-family: var(--sans);
   font-size: var(--text-base);
-  color: var(--navy-70);
+  color: var(--text-70);
   line-height: 1.8;
 }
 
 .body strong {
-  color: var(--navy);
+  color: var(--text);
   font-weight: 500;
 }
