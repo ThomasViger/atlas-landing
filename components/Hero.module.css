@@ -31,21 +31,36 @@
   height: min(58vh, 560px);
 }
 
+/* Titre accessible (lecteurs d'écran / SEO) ; le mot visible est l'SVG. */
+.srHeading {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Conteneur SVG du mot ATLAS, centré sur la scène. La taille responsive est
+   portée par la largeur de l'SVG ; le viewBox gère l'échelle interne. */
 .word {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: max-content;
+  width: clamp(244px, 47vw, 760px);
+  height: auto;
+  overflow: visible;
+}
+
+.wordText {
   font-family: var(--display);
   font-weight: 400;
-  font-size: var(--text-display);
-  line-height: 1;
   letter-spacing: 0.08em;
-  text-indent: 0.08em; /* compense l'espace de chasse du dernier caractère */
-  text-transform: uppercase;
-  color: var(--text);
-  margin: 0;
+  fill: var(--text);
 }
 
 .wordBack { z-index: 1; }
@@ -70,19 +85,11 @@
   mask-image: linear-gradient(180deg, #000 76%, transparent 94%);
 }
 
-/* Duplicata clippé : la moitié haute des lettres repasse devant la
-   statue, et le L entier (colonne 41-59%) reste au premier plan —
-   sinon sa barre horizontale disparaît derrière le torse et
-   « ATLAS » se lit « ATIAS ». Les % sont relatifs au mot lui-même
-   (width: max-content), donc stables à toutes les tailles. */
+/* Calque avant : le haut des lettres + la colonne du L repassent devant la
+   statue (sinon « ATLAS » se lit « ATIAS »). Le clip est porté par le
+   <clipPath> SVG dans le markup ; ici on ne gère que l'empilement. */
 .wordFront {
   z-index: 3;
-  clip-path: polygon(
-    0 0, 100% 0, 100% 45%,
-    59% 45%, 59% 100%,
-    41% 100%, 41% 45%,
-    0 45%
-  );
   user-select: none;
   pointer-events: none;
 }

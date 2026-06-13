@@ -14,13 +14,15 @@ export default function Hero() {
       <HeroIntro />
 
       <div className={styles.stage}>
-        <h1 className={`${styles.word} ${styles.wordBack}`} data-hero="word">
-          Atlas
-          <span className="sr-only">
-            {' '}
-            — Portez votre cabinet, sans en porter le poids.
-          </span>
+        <h1 className={styles.srHeading}>
+          Atlas — Portez votre cabinet, sans en porter le poids.
         </h1>
+
+        {/* Le mot ATLAS est rendu en SVG <text> : vectoriel, donc net à toute
+            taille — l'ancien duplicata clippé en CSS rastérisait le calque avant
+            et crénelait les obliques du « A ». Le clip du calque avant est ici un
+            <clipPath> SVG (mêmes fractions que l'ancien polygon CSS). */}
+        <WordMark className={`${styles.word} ${styles.wordBack}`} />
 
         {STATUE_SRC ? (
           <>
@@ -37,13 +39,7 @@ export default function Hero() {
                 height={1448}
               />
             </div>
-            <span
-              className={`${styles.word} ${styles.wordFront}`}
-              data-hero="word"
-              aria-hidden="true"
-            >
-              Atlas
-            </span>
+            <WordMark className={`${styles.word} ${styles.wordFront}`} clipped />
           </>
         ) : (
           <div
@@ -59,5 +55,39 @@ export default function Hero() {
         <span className="accent">sans en porter le poids.</span>
       </p>
     </section>
+  )
+}
+
+// Mot ATLAS vectoriel. `clipped` = calque avant (haut des lettres + colonne du L
+// repassent devant la statue), via un <clipPath> en coordonnées objectBoundingBox
+// (mêmes fractions que l'ancien polygon CSS : haut 45 %, L entre 41 % et 59 %).
+function WordMark({ className, clipped = false }: { className: string; clipped?: boolean }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 1240 320"
+      preserveAspectRatio="xMidYMid meet"
+      aria-hidden="true"
+      focusable="false"
+    >
+      {clipped && (
+        <defs>
+          <clipPath id="atlasFrontClip" clipPathUnits="objectBoundingBox">
+            <polygon points="0,0 1,0 1,0.45 0.59,0.45 0.59,1 0.41,1 0.41,0.45 0,0.45" />
+          </clipPath>
+        </defs>
+      )}
+      <text
+        className={styles.wordText}
+        data-hero="word"
+        x="620"
+        y="258"
+        textAnchor="middle"
+        fontSize="300"
+        clipPath={clipped ? 'url(#atlasFrontClip)' : undefined}
+      >
+        ATLAS
+      </text>
+    </svg>
   )
 }
