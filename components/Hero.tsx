@@ -18,7 +18,7 @@ export default function Hero() {
           Atlas
           <span className="sr-only">
             {' '}
-            — Portez votre cabinet. Sans en porter le poids.
+            — Portez votre cabinet, sans en porter le poids.
           </span>
         </h1>
 
@@ -55,18 +55,9 @@ export default function Hero() {
       </div>
 
       <p className={styles.tagline} data-hero="fade-up">
-        Portez votre cabinet.{' '}
-        <span className="accent">Sans en porter le poids.</span>
+        Portez votre cabinet,{' '}
+        <span className="accent">sans en porter le poids.</span>
       </p>
-
-      <div className={styles.ctaRow} data-hero="fade-up">
-        <a href="#acces" className="btn btn-bronze btn-lg">
-          Être prévenu à l'ouverture
-        </a>
-        <span className={styles.ctaNote}>
-          Les premiers cabinets à nous rejoindre garderont leur tarif, à vie.
-        </span>
-      </div>
     </section>
   )
 }
