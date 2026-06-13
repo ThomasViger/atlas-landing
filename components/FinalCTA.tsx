@@ -1,5 +1,6 @@
 // components/FinalCTA.tsx
 import styles from './FinalCTA.module.css'
+import ContactForm from './ContactForm'
 
 export default function FinalCTA() {
   return (
@@ -11,12 +12,7 @@ export default function FinalCTA() {
           votre cabinet{' '}
           <span className="accent">autrement.</span>
         </h2>
-        <a
-          href="mailto:contact@thomasviger.com?subject=Liste%20d'attente%20Atlas"
-          className="btn btn-bronze btn-xl"
-        >
-          Être prévenu à l'ouverture
-        </a>
+        <ContactForm />
         <p className={styles.note}>
           Liste d'attente ouverte · Priorité aux cabinets du Barreau de Rouen pour l'Alpha
         </p>
