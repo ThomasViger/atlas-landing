@@ -5,32 +5,39 @@ const modules = [
   {
     num: '01 — Dossiers & clients',
     title: 'Chaque affaire,\nà portée de main.',
-    desc: 'Échéances, parties, clients, documents — au même endroit. La détection des conflits d\'intérêts est intégrée, vérifiée à l\'ouverture du dossier.',
+    desc: 'Échéances, parties, clients, documents — au même endroit.',
     label: 'Screenshot — Dossiers',
     reverse: false,
   },
   {
     num: '02 — Agenda & alertes',
     title: 'Les délais\nne se reportent pas.',
-    desc: 'Atlas surveille les délais procéduraux et vous alerte avant qu\'il soit trop tard.',
+    desc: 'Atlas surveille les délais procéduraux et vous alerte avant qu\'il ne soit trop tard.',
     label: 'Screenshot — Agenda',
     reverse: true,
   },
   {
     num: '03 — Facturation',
-    title: 'Prête pour la facture\nélectronique 2026.',
-    desc: 'Factures conformes, Factur-X, TVA, acomptes, avoirs — archivées dans le dossier. La réforme 2026, déjà intégrée.',
+    title: 'Facturer,\nsans la paperasse.',
+    desc: 'Atlas prépare vos factures, suit les règlements et les classe dans le bon dossier. La facturation électronique 2026 est déjà prête — sans rien changer à vos habitudes.',
     label: 'Screenshot — Facturation',
     reverse: false,
   },
   {
     num: '04 — Documents',
     title: 'Retrouvables\nen quelques secondes.',
-    desc: 'Actes, courriers, pièces — classés par dossier. Plus besoin de nommer des fichiers "version_finale_2_ok_def".',
+    desc: 'Actes, courriers, pièces — rangés par dossier et retrouvés en quelques secondes.',
     label: 'Screenshot — Documents',
     reverse: true,
   },
 ]
+
+// Rend les occurrences de « Atlas » en gras + majuscules dans la prose.
+function renderDesc(text: string) {
+  return text.split(/(Atlas)/).map((part, i) =>
+    part === 'Atlas' ? <strong key={i}>ATLAS</strong> : part
+  )
+}
 
 export default function Features() {
   return (
@@ -63,7 +70,7 @@ export default function Features() {
                   <span key={i}>{line}{i === 0 && <br />}</span>
                 ))}
               </h2>
-              <p className={styles.desc}>{mod.desc}</p>
+              <p className={styles.desc}>{renderDesc(mod.desc)}</p>
             </div>
             <div className={styles.img} data-animate="fade">
               <span className={styles.imgLabel}>{mod.label}</span>
