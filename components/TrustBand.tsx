@@ -4,23 +4,15 @@ import styles from './TrustBand.module.css'
 const signals = [
   {
     tag: 'Hébergement',
-    text: 'Serveurs OVHcloud — données qui ne quittent pas le territoire français',
+    text: 'Hébergé en France.',
   },
   {
     tag: 'Conformité',
-    text: 'RGPD par défaut — pas une case à cocher, une fondation',
-  },
-  {
-    tag: 'Indépendance',
-    text: 'Développeur français indépendant, pas un éditeur de logiciel',
+    text: 'Respecte le RGPD.',
   },
   {
     tag: 'Validation',
     text: 'Construit avec des avocats du Barreau de Rouen',
-  },
-  {
-    tag: 'Support',
-    text: 'Par email, en français, depuis la France',
   },
 ]
 
