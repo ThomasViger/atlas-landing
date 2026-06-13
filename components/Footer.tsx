@@ -10,9 +10,9 @@ export default function Footer() {
           <a href="#modules">Produit</a>
           <a href="/mentions-legales">Mentions légales</a>
           <a href="/confidentialite">Politique de confidentialité</a>
-          <a href="mailto:contact@thomasviger.com">Contact</a>
+          <a href="#acces">Contact</a>
         </nav>
-        <span className={styles.sig}>Atlas, fait en France en MMXXVI</span>
+        <span className={styles.sig}>© 2026 Atlas</span>
       </div>
     </footer>
   )
