@@ -15,18 +15,14 @@ export default function Founder() {
             L'artisan derrière Atlas
           </span>
           <p className={styles.intro}>
-            Je m'appelle Thomas Viger. Je suis développeur indépendant, pas avocat.
+            Je m'appelle Thomas Viger. Je suis ingénieur recherche et développement, pas avocat.
           </p>
           <div className={styles.body}>
             <p>
-              J'ai construit Atlas après avoir observé que les outils disponibles étaient
-              soit trop chers, soit trop lourds, soit les deux. Avec des avocats du Barreau
-              de Rouen, j'ai construit quelque chose que j'aurais voulu trouver si j'avais
-              été à leur place : un logiciel qui fait ce qu'on lui demande, sans surprises.
-            </p>
-            <p>
-              Atlas est hébergé en France. Son code est maintenu par une seule personne —
-              ce qui oblige à faire simple, et à tenir sur la durée.
+              J'ai construit <strong>ATLAS</strong> après avoir observé que les outils
+              disponibles étaient soit trop chers, soit trop lourds, soit les deux. Avec des
+              avocats du Barreau de Rouen, j'ai construit l'outil que j'aurais voulu avoir si
+              j'avais été à leur place : un logiciel qui fait ce qu'on lui demande, sans surprises.
             </p>
           </div>
           <div className={styles.sig}>Thomas Viger</div>
