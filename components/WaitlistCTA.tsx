@@ -10,9 +10,6 @@ const perks = [
   "Votre avis influence les fonctionnalités du lancement",
 ];
 
-const TOTAL = 500;
-const COUNT = 412;
-
 export default function WaitlistCTA() {
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle"|"loading"|"success"|"error">("idle");
@@ -85,36 +82,6 @@ export default function WaitlistCTA() {
               </p>
             </div>
 
-            {/* Progress bar */}
-            <div style={{ marginBottom:32 }}>
-              <div style={{
-                display:"flex", justifyContent:"space-between", alignItems:"center",
-                marginBottom:8,
-              }}>
-                <span style={{ fontFamily:"var(--mono)", fontSize:11, color:"var(--mute)", letterSpacing:"0.06em" }}>
-                  PLACES RÉSERVÉES
-                </span>
-                <span style={{ fontFamily:"var(--mono)", fontSize:12, color:"var(--amber-2)" }}>
-                  {COUNT} / {TOTAL}
-                </span>
-              </div>
-              <div style={{
-                height:6, borderRadius:99, background:"rgba(255,255,255,0.07)",
-                overflow:"hidden",
-              }}>
-                <div style={{
-                  height:"100%", borderRadius:99,
-                  width:`${(COUNT/TOTAL)*100}%`,
-                  background:"linear-gradient(90deg, #F59E0B, #FBBF24)",
-                  boxShadow:"0 0 12px rgba(245,158,11,0.5)",
-                }} />
-              </div>
-              <div style={{
-                fontFamily:"var(--mono)", fontSize:10.5, color:"var(--mute)",
-                marginTop:6, textAlign:"right",
-              }}>{TOTAL - COUNT} places restantes</div>
-            </div>
-
             {/* Perks */}
             <ul style={{
               listStyle:"none", padding:0, margin:"0 0 28px",
@@ -178,13 +145,7 @@ export default function WaitlistCTA() {
 
             {/* Trust line */}
             <div className="form-meta" style={{ justifyContent:"center", marginTop:18 }}>
-              <div className="avatars">
-                {["T","M","L","C"].map(l => <span key={l}>{l}</span>)}
-              </div>
-              <span>
-                <b style={{ color:"var(--ink)", fontWeight:500 }}>412</b> avocats inscrits ·
-                {" "}Barreaux de Paris, Lyon, Bordeaux, Rouen
-              </span>
+              <span>Liste d&apos;attente ouverte</span>
             </div>
 
             <p style={{

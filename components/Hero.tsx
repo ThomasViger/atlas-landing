@@ -134,10 +134,7 @@ function WaitlistForm({ id }: { id: string }) {
         </div>
       )}
       <div className="form-meta">
-        <div className="avatars">
-          {["T","M","L","C"].map(l => <span key={l}>{l}</span>)}
-        </div>
-        <span><b style={{ color:"var(--ink)", fontWeight:500 }}>412</b> avocats inscrits · Barreaux de Paris, Lyon, Bordeaux</span>
+        <span>Liste d&apos;attente ouverte</span>
       </div>
     </div>
   );
@@ -176,7 +173,7 @@ export default function Hero() {
             </h1>
             <p style={{ fontSize:18, color:"var(--ink-2)", maxWidth:540, marginBottom:36, lineHeight:1.55 }}>
               Atlas est le copilote pensé pour l&apos;avocat qui exerce seul. Rédaction, facturation, agenda, coffre-fort —{" "}
-              <strong style={{ color:"var(--ink)", fontWeight:500 }}>un seul outil</strong>, conçu avec des avocats du Barreau de Rouen.
+              <strong style={{ color:"var(--ink)", fontWeight:500 }}>un seul outil</strong>, conçu avec une avocate en exercice.
             </p>
             <WaitlistForm id="waitlist-hero" />
           </div>
