@@ -109,8 +109,8 @@ export default function Founder() {
             <p style={{
               fontSize:15, color:"var(--ink-2)", lineHeight:1.75, marginBottom:28,
             }}>
-              Atlas naît d&apos;observations terrain, pas d&apos;une étude de marché. Chaque décision
-              produit est validée avec des avocats du Barreau de Rouen, sur des cas réels —
+              Atlas naît d&apos;observations terrain, pas d&apos;une étude de marché. Il est construit
+              avec une avocate en exercice, sur des cas réels —
               pas sur une hypothèse de startup.
             </p>
 
