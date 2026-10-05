@@ -12,7 +12,7 @@ const signals = [
   },
   {
     tag: 'Validation',
-    text: 'Construit avec des avocats du Barreau de Rouen',
+    text: 'Construit avec une avocate en exercice',
   },
 ]
 

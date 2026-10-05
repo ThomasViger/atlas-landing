@@ -14,7 +14,7 @@ export default function FinalCTA() {
         </h2>
         <ContactForm />
         <p className={styles.note}>
-          Liste d'attente ouverte · Priorité aux cabinets du Barreau de Rouen pour l'Alpha
+          Liste d'attente ouverte
         </p>
       </div>
     </section>
