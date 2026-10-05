@@ -20,9 +20,9 @@ export default function Founder() {
           <div className={styles.body}>
             <p>
               J'ai construit <strong>ATLAS</strong> après avoir observé que les outils
-              disponibles étaient soit trop chers, soit trop lourds, soit les deux. Avec des
-              avocats du Barreau de Rouen, j'ai construit l'outil que j'aurais voulu avoir si
-              j'avais été à leur place : un logiciel qui fait ce qu'on lui demande, sans surprises.
+              disponibles étaient soit trop chers, soit trop lourds, soit les deux. Avec une
+              avocate, j'ai construit l'outil que j'aurais voulu avoir si j'avais été à sa
+              place : un logiciel qui fait ce qu'on lui demande, sans surprises.
             </p>
           </div>
           <div className={styles.sig}>Thomas Viger</div>
